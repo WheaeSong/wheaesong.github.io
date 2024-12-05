@@ -1,0 +1,340 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    461-图像翻转 | Noir
+</title>
+<link rel="shortcut icon" href="https://wheaesong.github.io//favicon.ico?v=1733389511209">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wheaesong.github.io//styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://wheaesong.github.io//media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+            
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+                
+
+                    
+                            
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://wheaesong.github.io/">
+                <img class="avatar" src="https://wheaesong.github.io//images/avatar.png?v=1733389511209" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Noir
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            461-图像翻转
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2021-03-23</time>
+                            
+                                <a href="https://wheaesong.github.io/tag/a0PT2qPsV5/" class="post-tag i-tag
+                            i-tag-info">
+                            #leetCode
+                        </a>
+                                
+                                <a href="https://wheaesong.github.io/tag/fwDKnVKfXe/" class="post-tag i-tag
+                            i-tag-">
+                            #int
+                        </a>
+                                
+                        </div>
+                        
+                            <div class="post-feature-image" style="background-image: url('https://wheaesong.github.io//post-images/832-tuxiangfanzhuan.jpg')"></div>
+                            
+                                <div class="post-content">
+                                    <h4 id="题目描述">题目描述：</h4>
+<blockquote>
+<p>给定一个二进制矩阵 A，我们想先水平翻转图像，然后反转图像并返回结果。</p>
+<p>水平翻转图片就是将图片的每一行都进行翻转，即逆序。例如，水平翻转 [1, 1, 0] 的结果是 [0, 1, 1]。</p>
+<p>反转图片的意思是图片中的 0 全部被 1 替换， 1 全部被 0 替换。例如，反转 [0, 1, 1] 的结果是 [1, 0, 0]。</p>
+<p></p>
+<p>示例 1：</p>
+<p>输入：[[1,1,0],[1,0,1],[0,0,0]]<br>
+输出：[[1,0,0],[0,1,0],[1,1,1]]<br>
+解释：首先翻转每一行: [[0,1,1],[1,0,1],[0,0,0]]；<br>
+然后反转图片: [[1,0,0],[0,1,0],[1,1,1]]<br>
+示例 2：</p>
+<p>输入：[[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]<br>
+输出：[[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]<br>
+解释：首先翻转每一行: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]；<br>
+然后反转图片: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]</p>
+<p>来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/flipping-an-image<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+</blockquote>
+<h4 id="解题思路">解题思路</h4>
+<p>​	首先有个条件是知道的，输入的必定是一个方阵，虽然不一定用得到</p>
+<p>他要求两次翻转，行反转无疑是最简单的，我只用取出每一行的值，然后倒序切片就完成了第一个步骤。</p>
+<p>然后是图片反正，就是0 和 1 的互换，那我觉得效率最高的应该是二进制运算，有个前提我们知道任 1^1 的值是 0，而0^1 的值是为1，这样无疑是最高的效率</p>
+<h4 id="代码实现">代码实现</h4>
+<pre><code class="language-python">class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -&gt; List[List[int]]:
+        result = []
+        for item in image: 
+            result.append(item[::-1])
+        for item in result:
+            for i in range(len(item)):
+                item[i] = item[i] ^ 1
+            
+        return result
+</code></pre>
+<h4 id="知识点补充">知识点补充</h4>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>按位与运算符：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0</td>
+<td>(a &amp; b) 输出结果 12 ，二进制解释： 0000 1100</td>
+</tr>
+<tr>
+<td>|</td>
+<td>按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。</td>
+<td>(a | b) 输出结果 61 ，二进制解释： 0011 1101</td>
+</tr>
+<tr>
+<td>^</td>
+<td>按位异或运算符：当两对应的二进位相异时，结果为1</td>
+<td>(a ^ b) 输出结果 49 ，二进制解释： 0011 0001</td>
+</tr>
+<tr>
+<td>~</td>
+<td>按位取反运算符：对数据的每个二进制位取反,即把1变为0,把0变为1。~x 类似于 -x-1</td>
+<td>(~a ) 输出结果 -61 ，二进制解释： 1100 0011， 在一个有符号二进制数的补码形式。</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移动运算符：运算数的各二进位全部左移若干位，由&quot;&lt;&lt;&quot;右边的数指定移动的位数，高位丢弃，低位补0。</td>
+<td>a &lt;&lt; 2 输出结果 240 ，二进制解释： 1111 0000</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移动运算符：把&quot;&gt;&gt;&quot;左边的运算数的各二进位全部右移若干位，&quot;&gt;&gt;&quot;右边的数指定移动的位数</td>
+<td>a &gt;&gt; 2 输出结果 15 ，二进制解释： 0000 1111</td>
+</tr>
+</tbody>
+</table>
+<h4 id="运行结果">运行结果：</h4>
+<h5 id="复杂度分析">复杂度分析：</h5>
+<ul>
+<li>时间复杂度、空间复杂度都是O（1）</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://img.imgdb.cn/item/6059f4c78322e6675c6689db.jpg" alt="" loading="lazy"></figure>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://wheaesong.github.io/post/hello-gridea/">
+                                <h3 class="post-title">
+                                    Hello Gridea
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0">题目描述：</a></li>
+<li><a href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF">解题思路</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0">代码实现</a></li>
+<li><a href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85">知识点补充</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C">运行结果：</a>
+<ul>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90">复杂度分析：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://wheaesong.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+        
+            <script>
+    window.onload = function() {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23liwcV7WaG8c2IIg4',
+            clientSecret: 'd6c3a829b39774c182e9a4f980fa01ef502043e4',
+            repo: 'wheaesong.github.io',
+            owner: 'WheaeSong',
+            admin: ['WheaeSong'],
+            id: (location.pathname).substring(0, 49), // Ensure uniqueness and length less than 50
+            distractionFreeMode: false // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    }
+</script>
+                
+
+                    
+                                
+</body>
+
+</html>

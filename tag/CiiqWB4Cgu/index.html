@@ -1,0 +1,337 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    python | Noir
+</title>
+<link rel="shortcut icon" href="https://wheaesong.github.io//favicon.ico?v=1733389511209">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wheaesong.github.io//styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://wheaesong.github.io//media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://wheaesong.github.io/">
+                <img class="avatar" src="https://wheaesong.github.io//images/avatar.png?v=1733389511209" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Noir
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+    <div class="i-card">
+        <b>标签：#
+        python</b>
+    </div>
+    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://wheaesong.github.io/post/ce-shi-wen-zhang/">
+                        从 0-1 搭建高性能代理池
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2024-05-22</time>
+                    
+                        <a href="https://wheaesong.github.io/tag/CiiqWB4Cgu/" class="post-tag i-tag
+                            i-tag-info">
+            #python
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                        <a href="https://wheaesong.github.io/post/ce-shi-wen-zhang/" class="post-feature-image" style="background-image:url(https://wheaesong.github.io//post-images/ce-shi-wen-zhang.jpg) ">
+                        </a>
+                        
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            1、架构
+​	其实代理池的架构说来说去也就那么几件事，可用性，稳定性。而稳定的代理源有很多渠道，包括付费等很多手段。也是第一次搭建，代理源的事情就不细说，主要讲一讲代理评分的标准。
+在开始开发之前，到 github 上学习了很多优秀的开源代理软件，比如崔老师的 proxyPool，这个是很经典的源码了，在自己动手之前也一直用崔老师的开源，但可能是用的人并不少，个人感觉代理的质量并不高，至少就免费的来说，质量是不高的，响应比较慢，也会存在大量的无效 IP 。
+一个代理池无非就几个东西，
+
+检测器，检测 IP 可用性的组件，我看了很多，大部分是通过 requests.get() 实现的检测的，衡量之后我并没有选择这个，因为 requests 是同步的，也就是说每个请求从打开到关闭，必须完全等到超时或者请求响应才结束，所以我觉得可能在检测效率上会有影响。
+调度器，从已经清洗好的代理池选择可用的代理，同时也就包括代理评分逻辑的构建，包括加分、扣分、删除代理等等。
+存储器，代理存储的地方，我这里选择的是 redis ，介于 redis 高效的相应。
+
+具体细节大致如下：
+
+抓取器并不单独运行，而是通过调度器调度。当调取器轮询时，发现池中代理数量小于阀值时候，就会启动抓取器，抓取器抓取代理，直接送入检测器，检测通过会进行入库。
+如果是代理池中代理数量并不低于阀值，并不会取获取新的代理，而是对池中的代理进行评分刷新。在池中采用 redis 的 Zset 类型，键值分别为代理和分数。这既保证的代理的唯一性（不用另外构建去重逻辑），方便对代理的可用性进行量化。
+这里的评分量化的逻辑比较简单，在入库时赋初始值为10，检测通过加一分，检测不通过减一分，低于0分删除，最高分为100，但这是可以控制的，如果对代理的稳定性需求比较高，可以适当调高这个最大值。
+这里就贴一下 出入池的核心代码，代码比较简单，注释也写得比较清晰了。
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    : 2022/12/14 10:46
+# @Author  : Noir
+# @FileName: redisCon.py
+# @Software: PyCharm
+
+# redis 连接池
+import redis
+from setting import *
+
+PoolEmptyError = redis.exceptions.ConnectionError
+
+
+class RedisClient(object):
+    def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD):
+        &amp;quot;&amp;quot;&amp;quot;
+        初始化
+        :param host: 地址
+        :param port: 端口
+        :param password: 密码
+        &amp;quot;&amp;quot;&amp;quot;
+        self.redispool = redis.ConnectionPool(host=host, port=port, password=password, decode_responses=True)
+        self.db = redis.Redis(connection_pool=self.redispool)
+
+    def add(self, proxy, score=INITIAL_SCORE):
+        &amp;quot;&amp;quot;&amp;quot;
+        添加代理，设置分数为最高
+        :param proxy: 代理
+        :param score: 分数
+        :return: 添加结果
+        &amp;quot;&amp;quot;&amp;quot;
+        if not self.db.zscore(REDIS_KEY, proxy):
+            return self.db.zadd(REDIS_KEY, {proxy: score})
+
+    # 清空代理池
+    def flush(self):
+        &amp;quot;&amp;quot;&amp;quot;
+        清空代理池
+        :return: 清空结果
+        &amp;quot;&amp;quot;&amp;quot;
+        return self.db.delete(REDIS_KEY)
+
+    # 代理分数增加
+    def increase(self, proxy):
+        &amp;quot;&amp;quot;&amp;quot;
+        代理分数增加
+        :param proxy: 代理
+        :return: 增加后的分数
+        &amp;quot;&amp;quot;&amp;quot;
+        score = self.db.zscore(REDIS_KEY, proxy)
+        if score and score &amp;lt; MAX_SCORE:
+            print(&#39;代理&#39;, proxy, &#39;当前分数&#39;, score, &#39;加1&#39;)
+            return self.db.zincrby(REDIS_KEY, 1, proxy)
+        else:
+            print(&#39;代理&#39;, proxy, &#39;当前分数&#39;, score, &#39;已达最大值&#39;)
+            return self.db.zadd(REDIS_KEY, {proxy: MAX_SCORE})
+
+
+    def random(self):
+        &amp;quot;&amp;quot;&amp;quot;
+        随机获取有效代理，首先尝试获取最高分的一个代理，如果不存在，则按照排名获取一个，否则异常
+        :return: 随机代理
+        &amp;quot;&amp;quot;&amp;quot;
+        result = self.db.zrangebyscore(REDIS_KEY, MAX_SCORE, MAX_SCORE)
+        if len(result):
+            return result
+        else:
+            result = self.db.zrevrange(REDIS_KEY, 0, 100)
+            if len(result):
+                return result[0]
+            else:
+                raise PoolEmptyError
+
+    def decrease(self, proxy):
+        &amp;quot;&amp;quot;&amp;quot;
+        代理值减一分，小于最小值，则代理删除
+        :param proxy: 代理
+        :return: 修改后的代理分数
+        &amp;quot;&amp;quot;&amp;quot;
+        score = self.db.zscore(REDIS_KEY, proxy)
+        if score and score &amp;gt; MIN_SCORE:
+            print(&#39;代理&#39;, proxy, &#39;当前分数&#39;, score, &#39;减1&#39;)
+            return self.db.zincrby(REDIS_KEY, -1, proxy)
+        else:
+            print(&#39;代理&#39;, proxy, &#39;当前分数&#39;, score, &#39;移除&#39;)
+            return self.db.zrem(REDIS_KEY, proxy)
+
+    def exists(self, proxy):
+        &amp;quot;&amp;quot;&amp;quot;
+        判断是否存在
+        :param proxy: 代理
+        :return: 是否存在
+        &amp;quot;&amp;quot;&amp;quot;
+        return not self.db.zscore(REDIS_KEY, proxy) == None
+
+    def max(self, proxy):
+        &amp;quot;&amp;quot;&amp;quot;
+        将代理设置为 MAX_SCORE
+        :param
+        :return: 设置结果
+        &amp;quot;&amp;quot;&amp;quot;
+        print(&#39;代理&#39;, proxy, &#39;可用，设置为&#39;, MAX_SCORE)
+        return self.db.zadd(REDIS_KEY, {proxy: MAX_SCORE})
+
+    # 获取代理数量
+    def count(self):
+        &amp;quot;&amp;quot;&amp;quot;
+        获取数量
+        :return: 数量
+        &amp;quot;&amp;quot;&amp;quot;
+        return self.db.zcard(REDIS_KEY)
+
+    # 获取全部代理
+    def all(self):
+        &amp;quot;&amp;quot;&amp;quot;
+        获取全部代理
+        :return: 全部代理列表
+        &amp;quot;&amp;quot;&amp;quot;
+        return self.db.zrangebyscore(REDIS_KEY, MIN_SCORE, MAX_SCORE)
+
+
+这个中几乎所有的方法都是对 redis.redis()对象的方法的封装，但确实是仅仅对redis已有方法的封装就几乎满足可我们的全部要求，这也是选择 redis 而非Mysql 的重要原因。
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://wheaesong.github.io/post/ce-shi-wen-zhang/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://wheaesong.github.io//images/avatar.png?v=1733389511209)">
+        </div>
+        <h1 class="id_card-title">
+            Noir
+        </h1>
+        <h2 class="id_card-description">
+            好好睡，晚安
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                <a href="https://github.com/WheaeSong" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-github"></i></a>
+                
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://wheaesong.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+</body>
+
+</html>

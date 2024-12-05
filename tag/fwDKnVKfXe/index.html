@@ -1,0 +1,288 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    int | Noir
+</title>
+<link rel="shortcut icon" href="https://wheaesong.github.io//favicon.ico?v=1733389511209">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wheaesong.github.io//styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://wheaesong.github.io//media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://wheaesong.github.io/">
+                <img class="avatar" src="https://wheaesong.github.io//images/avatar.png?v=1733389511209" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Noir
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-container main-container">
+                <div id="content" class="main-container-left">
+                    
+    <div class="i-card">
+        <b>标签：#
+        int</b>
+    </div>
+    
+        
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://wheaesong.github.io/post/832-tuxiangfanzhuan/">
+                        461-图像翻转
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2021-03-23</time>
+                    
+                        <a href="https://wheaesong.github.io/tag/a0PT2qPsV5/" class="post-tag i-tag
+                            i-tag-">
+            #leetCode
+        </a>
+                        
+                        <a href="https://wheaesong.github.io/tag/fwDKnVKfXe/" class="post-tag i-tag
+                            i-tag-other_2">
+            #int
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                        <a href="https://wheaesong.github.io/post/832-tuxiangfanzhuan/" class="post-feature-image" style="background-image:url(https://wheaesong.github.io//post-images/832-tuxiangfanzhuan.jpg) ">
+                        </a>
+                        
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            题目描述：
+
+给定一个二进制矩阵 A，我们想先水平翻转图像，然后反转图像并返回结果。
+水平翻转图片就是将图片的每一行都进行翻转，即逆序。例如，水平翻转 [1, 1, 0] 的结果是 [0, 1, 1]。
+反转图片的意思是图片中的 0 全部被 1 替换， 1 全部被 0 替换。例如，反转 [0, 1, 1] 的结果是 [1, 0, 0]。
+
+示例 1：
+输入：[[1,1,0],[1,0,1],[0,0,0]]
+输出：[[1,0,0],[0,1,0],[1,1,1]]
+解释：首先翻转每一行: [[0,1,1],[1,0,1],[0,0,0]]；
+然后反转图片: [[1,0,0],[0,1,0],[1,1,1]]
+示例 2：
+输入：[[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
+输出：[[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+解释：首先翻转每一行: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]；
+然后反转图片: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/flipping-an-image
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+解题思路
+​	首先有个条件是知道的，输入的必定是一个方阵，虽然不一定用得到
+他要求两次翻转，行反转无疑是最简单的，我只用取出每一行的值，然后倒序切片就完成了第一个步骤。
+然后是图片反正，就是0 和 1 的互换，那我觉得效率最高的应该是二进制运算，有个前提我们知道任 1^1 的值是 0，而0^1 的值是为1，这样无疑是最高的效率
+代码实现
+class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -&amp;gt; List[List[int]]:
+        result = []
+        for item in image: 
+            result.append(item[::-1])
+        for item in result:
+            for i in range(len(item)):
+                item[i] = item[i] ^ 1
+            
+        return result
+
+知识点补充
+
+
+
+运算符
+描述
+实例
+
+
+
+
+&amp;amp;
+按位与运算符：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0
+(a &amp;amp; b) 输出结果 12 ，二进制解释： 0000 1100
+
+
+|
+按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。
+(a | b) 输出结果 61 ，二进制解释： 0011 1101
+
+
+^
+按位异或运算符：当两对应的二进位相异时，结果为1
+(a ^ b) 输出结果 49 ，二进制解释： 0011 0001
+
+
+~
+按位取反运算符：对数据的每个二进制位取反,即把1变为0,把0变为1。~x 类似于 -x-1
+(~a ) 输出结果 -61 ，二进制解释： 1100 0011， 在一个有符号二进制数的补码形式。
+
+
+&amp;lt;&amp;lt;
+左移动运算符：运算数的各二进位全部左移若干位，由&amp;quot;&amp;lt;&amp;lt;&amp;quot;右边的数指定移动的位数，高位丢弃，低位补0。
+a &amp;lt;&amp;lt; 2 输出结果 240 ，二进制解释： 1111 0000
+
+
+&amp;gt;&amp;gt;
+右移动运算符：把&amp;quot;&amp;gt;&amp;gt;&amp;quot;左边的运算数的各二进位全部右移若干位，&amp;quot;&amp;gt;&amp;gt;&amp;quot;右边的数指定移动的位数
+a &amp;gt;&amp;gt; 2 输出结果 15 ，二进制解释： 0000 1111
+
+
+
+运行结果：
+复杂度分析：
+
+时间复杂度、空间复杂度都是O（1）
+
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://wheaesong.github.io/post/832-tuxiangfanzhuan/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+                <!-- 翻页 -->
+                
+                </div>
+                <!--  -->
+                <div class="main-container-middle"></div>
+                <!--  -->
+                <div id="sidebar" class="main-container-right">
+
+                    <!-- 个人信息 -->
+                    
+    <div class="id_card i-card">
+        <div class="id_card-avatar" style="background-image: url(https://wheaesong.github.io//images/avatar.png?v=1733389511209)">
+        </div>
+        <h1 class="id_card-title">
+            Noir
+        </h1>
+        <h2 class="id_card-description">
+            好好睡，晚安
+        </h2>
+        <!--  -->
+        <div class="id_card-sns">
+            <!-- github -->
+            
+                <a href="https://github.com/WheaeSong" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-github"></i></a>
+                
+                    <!-- twitter -->
+                    
+                            <!-- weibo -->
+                            
+                                    <!-- facebook -->
+                                    
+
+        </div>
+    </div>
+    
+
+                        <!-- 公告栏 -->
+                        
+
+                </div>
+            </div>
+
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://wheaesong.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+</body>
+
+</html>
